@@ -109,14 +109,27 @@ for (const row of ranked) {
   }
 }
 
+/**
+ * Write a line to stdout without ever failing the run: a closed pipe (EPIPE) is a reader's business, and a
+ * non-zero exit is a bot failure however harmless the reason. The harness captures stdout to 1 MiB, which
+ * this report is far inside.
+ */
+function say(line: string): void {
+  try {
+    process.stdout.write(line);
+  } catch {
+    // The consumer went away; the entry's file is written either way.
+  }
+}
+
 const winner = ranked[0];
 
 for (const row of ranked) {
-  process.stdout.write(
+  say(
     `${String(row.score).padStart(3)}  ${String(row.bytes).padStart(3)}B  ${row.id}  ${row.line}\n`,
   );
 }
-process.stdout.write(
+say(
   `\nchosen ${winner.id} at score ${winner.score} of a possible ${[...weights.values()].reduce((a, b) => a + b, 0) * 2}` +
     `, ${winner.chars} characters, ${winner.bytes} bytes\n` +
     `why: ${winner.note}\n` +
