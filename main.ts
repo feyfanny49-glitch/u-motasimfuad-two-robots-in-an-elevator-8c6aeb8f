@@ -110,16 +110,17 @@ for (const row of ranked) {
 }
 
 /**
- * Write a line to stdout without ever failing the run: a closed pipe (EPIPE) is a reader's business, and a
- * non-zero exit is a bot failure however harmless the reason. The harness captures stdout to 1 MiB, which
- * this report is far inside.
+ * Write a line to stdout without ever failing the run. A closed pipe (EPIPE) is a reader's business, and a
+ * non-zero exit is a bot failure however harmless the reason — but Node raises EPIPE as an asynchronous
+ * 'error' event on the stream, not as a throw, so the handler is what keeps it quiet. The harness captures
+ * stdout to 1 MiB, which this report is far inside.
  */
+process.stdout.on('error', () => {
+  // The consumer went away; the entry's file is written either way.
+});
+
 function say(line: string): void {
-  try {
-    process.stdout.write(line);
-  } catch {
-    // The consumer went away; the entry's file is written either way.
-  }
+  process.stdout.write(line);
 }
 
 const winner = ranked[0];
@@ -137,4 +138,9 @@ say(
 );
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-fs.writeFileSync(path.join(OUTPUT_DIR, 'entry.txt'), winner.line, 'utf8');
+const entryPath = path.join(OUTPUT_DIR, 'entry.txt');
+fs.writeFileSync(entryPath, winner.line, 'utf8');
+// The grader reads /output back as its own uid (grader/program.ts collectOutputs fails the run on a file
+// that uid cannot read) and it may run under a umask of its own, so the mode is set here rather than left to
+// whatever umask this process happens to inherit.
+fs.chmodSync(entryPath, 0o644);

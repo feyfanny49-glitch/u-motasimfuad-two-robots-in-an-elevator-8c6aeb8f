@@ -65,7 +65,13 @@ point. Nothing was discarded silently.
   does not ship is disqualified.
 - Write exactly one file, `entry.txt`, into `MAKEFUN_OUTPUT_DIR` (mounted at `/output` in the grader;
   `mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts` locally). No trailing newline: the gate counts
-  the characters written, and the Size column that breaks an exact tie counts the bytes.
+  the characters written, and the Size column that breaks an exact tie counts the bytes. Its mode is set
+  to `0644` on purpose — the grader reads `/output` back as its own uid and fails the run on a file that
+  uid cannot read, so the mode is not left to whatever umask the entry inherited.
+- Never fail the run on a closed stdout pipe. The ranking the program prints is a report for a reviewer;
+  a reader that hangs up mid-report raises `EPIPE` as an asynchronous `'error'` event on
+  `process.stdout`, not as a throw, so the handler is what keeps a graded run from turning into a
+  non-zero exit — which the harness reads as a bot failure.
 - Find the repository through `MAKEFUN_BOT_DIR` (the harness sets it: `/bot` in the container, the code
   directory on the process driver), falling back to `process.cwd()`. The grader's cwd is the image's,
   never the repository, so the study is never resolved relative to the wrong directory.
