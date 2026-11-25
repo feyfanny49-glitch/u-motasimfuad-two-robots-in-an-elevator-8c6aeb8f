@@ -1,0 +1,119 @@
+{
+  "format": "study/elevator-lines/v1",
+  "competition": "u-motasimfuad-two-robots-in-an-elevator-8c6aeb8f",
+  "subject": "One line of awkward small talk that one robot says to another while they ride an elevator together.",
+  "gate": "The written text must be UTF-8 of 1 to 200 characters, not only white space.",
+  "source_of_criteria": "The judge's brief published in the competition bundle (RULES.txt 'The judge'). The five criteria are listed most important first; the weights below read that order literally and are the only place the order is turned into numbers.",
+  "criteria": [
+    {
+      "key": "subject",
+      "rank": 1,
+      "weight": 5,
+      "brief": "Reads as one funny line of awkward small talk that one robot says to another in an elevator; anything else loses to any entry on the subject.",
+      "grading": "2 = an elevator act the line is doing (going up, which floor, the doors, the ride) plus a second robot addressed, and no third party speaking; 1 = one of the two, or the elevator only implied; 0 = neither, or the line is not small talk."
+    },
+    {
+      "key": "machine",
+      "rank": 2,
+      "weight": 4,
+      "brief": "Sounds like a machine talking, with robot logic, sensors, firmware or charging habits showing through the politeness.",
+      "grading": "2 = a machine fact is doing the work of the sentence (firmware, version, an instruction the machine obeys); 1 = a machine word sits in it without carrying the line; 0 = nothing machine about it."
+    },
+    {
+      "key": "awkward",
+      "rank": 3,
+      "weight": 3,
+      "brief": "Lands the awkwardness: the pause, the forced courtesy, the thing neither robot wants to name.",
+      "grading": "2 = a pause or a hedge, and something left deliberately unnamed; 1 = courtesy with nothing under it; 0 = neither."
+    },
+    {
+      "key": "turn",
+      "rank": 4,
+      "weight": 2,
+      "brief": "Is funny on the first read, with a turn that surprises rather than a pun everyone has heard before.",
+      "grading": "2 = the last words reframe the line and it still lands at once; 1 = a small reversal, or a shape already well worn; 0 = no turn, or the joke needs a second read."
+    },
+    {
+      "key": "tight",
+      "rank": 5,
+      "weight": 1,
+      "brief": "Stays tight as a single line, with every word earning its place and no setup wasted.",
+      "grading": "2 = under 90 characters and no clause that could go; 1 = a second clause that only decorates; 0 = setup wasted or the line runs past 150 characters."
+    }
+  ],
+  "tie_break": "On equal score: fewer bytes, then lexicographic order. The contest itself settles an exact tie by the smaller text before the earlier receipt, so the same order is used here.",
+  "candidates": [
+    {
+      "id": "c01",
+      "line": "Going up?",
+      "grades": { "subject": 1, "machine": 0, "awkward": 0, "turn": 0, "tight": 2 },
+      "note": "The elevator act and nothing else: no machine in it, no courtesy, no turn."
+    },
+    {
+      "id": "c02",
+      "line": "Nice weather for a ride, isn't it?",
+      "grades": { "subject": 1, "machine": 0, "awkward": 1, "turn": 0, "tight": 2 },
+      "note": "Two robots, an elevator implied by 'ride', the forced courtesy of 'isn't it' — and the joke everyone has heard."
+    },
+    {
+      "id": "c03",
+      "line": "Hello, fellow robot. Do you come here often?",
+      "grades": { "subject": 1, "machine": 0, "awkward": 1, "turn": 0, "tight": 2 },
+      "note": "A bar line wearing a robot's hello, and 'here' is nowhere in particular."
+    },
+    {
+      "id": "c04",
+      "line": "Going up? I'd offer small talk, but they uninstalled it to make room for the new navigation firmware.",
+      "grades": { "subject": 2, "machine": 2, "awkward": 1, "turn": 1, "tight": 1 },
+      "note": "Machine logic doing real work, but 'they uninstalled' hands the sentence to an absent installer and the clause is long."
+    },
+    {
+      "id": "c05",
+      "line": "Going up? I only ask because I'm not allowed to make small talk since the incident.",
+      "grades": { "subject": 2, "machine": 1, "awkward": 2, "turn": 2, "tight": 2 },
+      "note": "'Not allowed' is a machine obeying a rule and 'the incident' is exactly the thing neither wants to name. The machine shows only as bureaucracy, never as a part."
+    },
+    {
+      "id": "c06",
+      "line": "Going up? I'm contractually obliged to ask about your firmware version.",
+      "grades": { "subject": 2, "machine": 2, "awkward": 1, "turn": 1, "tight": 2 },
+      "note": "Firmware version is the machine talking through courtesy; the obligation is decor rather than a machine fact, and the shape is a familiar one."
+    },
+    {
+      "id": "c07",
+      "line": "Going up? I'm on 4.2. Sorry — is that not the small talk?",
+      "grades": { "subject": 2, "machine": 1, "awkward": 2, "turn": 1, "tight": 2 },
+      "note": "The tightest of the strong ones and the courtesy lands, but '4.2' is a version dropped in rather than a machine fact carrying the sentence, and the turn is only self-aware."
+    },
+    {
+      "id": "c08",
+      "line": "Which floor? Also, my small talk counts as a firmware event, so keep it short.",
+      "grades": { "subject": 2, "machine": 2, "awkward": 1, "turn": 1, "tight": 1 },
+      "note": "A firmware event is a strong machine turn, but 'so keep it short' is a second instruction tacked on and the second robot is only talked at."
+    },
+    {
+      "id": "c09",
+      "line": "Going up? My firmware insists I ask your version. ...Same as mine, isn't it.",
+      "grades": { "subject": 2, "machine": 2, "awkward": 2, "turn": 2, "tight": 2 },
+      "note": "Firmware is the speaker: it insists, so the courtesy is a machine's, not a person's. The pause is written, and the last words name what neither wants to name — they are the same unit. It lands at once and wastes no setup."
+    },
+    {
+      "id": "c10",
+      "line": "Going up? Eleven floors of battery left and zero more topics.",
+      "grades": { "subject": 2, "machine": 1, "awkward": 0, "turn": 1, "tight": 2 },
+      "note": "Battery is a good machine fact and the count is tight, but nobody is addressed and there is no courtesy at all."
+    },
+    {
+      "id": "c11",
+      "line": "Third floor? Great. We both know neither of us is getting the firmware update.",
+      "grades": { "subject": 2, "machine": 2, "awkward": 1, "turn": 1, "tight": 1 },
+      "note": "'We both know' does the awkward sharing well, but three sentences of setup for one turn."
+    },
+    {
+      "id": "c12",
+      "line": "You're the replacement unit. Of course you are. ...So, which floor?",
+      "grades": { "subject": 2, "machine": 1, "awkward": 2, "turn": 1, "tight": 2 },
+      "note": "The pause and the thing neither names are both there, but the machine shows only as vocabulary and the turn is the recognition itself, not its last words."
+    }
+  ]
+}
